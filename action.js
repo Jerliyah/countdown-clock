@@ -1,6 +1,6 @@
 /* ====== DOM Grab ====== */
 var countdown_text = document.querySelector('#countdown_text')
-var buttons = Array.from( document.querySelectorAll('nav button') );
+var buttons = Array.from( document.querySelectorAll('nav > button') );
 
 
 /* ====== Variables ====== */
