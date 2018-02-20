@@ -23,6 +23,13 @@ p {
     padding: 0.1em;
 }
 
+form {
+    padding: 0 1em;;
+} 
+
+form > input {
+    text-align: center;
+}
 
 
 nav {

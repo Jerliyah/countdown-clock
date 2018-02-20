@@ -1,7 +1,7 @@
 /* ====== DOM Grab ====== */
 var countdown_text = document.querySelector('#countdown-text')
 var buttons = Array.from( document.querySelectorAll('nav > button:not(.custom)') );
-var custom = document.querySelector('input')
+var custom = document.querySelector('form > input')
 
 
 /* ====== Variables ====== */
@@ -29,7 +29,10 @@ function display(seconds) {
 
 function set_timer(e) {
     e.stopPropagation();
-    let minutes = e.target.dataset.minutes || e.target.value
+    e.preventDefault();
+
+    let minutes = e.target.dataset.minutes || e.target.querySelector('input').value
+
     timer(minutes * 60)
 }
 
@@ -54,12 +57,15 @@ function timer(seconds) {
                     }, 1000)
 }
 
+
 function toggle_active(e) {
     let element = e.target
     
     // Have only one active element
     siblings = Array.from( element.parentNode.children )
     siblings.forEach( sibling => sibling.classList.remove('active') );
+    
+    if( element !== custom.parentNode ) { custom.value = '' }
 
     element.classList.toggle('active'); 
 }
@@ -73,4 +79,8 @@ buttons.forEach( button => {
     button.addEventListener('click', set_timer) 
     button.addEventListener('click', toggle_active)
 })
-custom.addEventListener('submit', set_timer)
+
+custom.value = '';
+// Submit event is only on the form (parentNode) instead of the input
+custom.parentNode.addEventListener('submit', set_timer)
+custom.parentNode.addEventListener('submit', toggle_active)
