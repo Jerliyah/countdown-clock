@@ -5,7 +5,7 @@ var custom = document.querySelector('input')
 
 
 /* ====== Variables ====== */
-
+var countdown;
 
 
 /* ====== Functions ====== */
@@ -17,25 +17,33 @@ function display(seconds) {
         leftover_seconds = "0" + leftover_seconds
     }
 
-    countdown_text.innerText = `${minutes}:${leftover_seconds}`
+    if(seconds > 0 ) {
+        countdown_text.innerText = `Back in \n${minutes}:${leftover_seconds}`
+    }
+    else {
+        countdown_text.innerText = 'Available'
+    }
+
 }
 
 
 function set_timer(e) {
     e.stopPropagation();
     let minutes = e.target.dataset.minutes || e.target.value
-    console.log(minutes)
-    // timer(minutes * 60)
+    timer(minutes * 60)
 }
 
 
 function timer(seconds) {
+    // Clear any previous timer
+    if( countdown ) { clearInterval(countdown) }
+
     
     const start = Date.now() + (seconds * 1000);
     
     display(seconds)
     
-    let countdown = setInterval( () => {
+    countdown = setInterval( () => {
 
                         let seconds_left = Math.round( (start - Date.now()) / 1000 )
                         
