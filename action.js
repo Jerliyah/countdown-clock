@@ -1,6 +1,7 @@
 /* ====== DOM Grab ====== */
-var countdown_text = document.querySelector('#countdown_text')
-var buttons = Array.from( document.querySelectorAll('nav > button') );
+var countdown_text = document.querySelector('#countdown-text')
+var buttons = Array.from( document.querySelectorAll('nav > button:not(.custom)') );
+var custom = document.querySelector('input')
 
 
 /* ====== Variables ====== */
@@ -21,8 +22,10 @@ function display(seconds) {
 
 
 function set_timer(e) {
-    let minutes = e.target.dataset.minutes
-    timer(minutes * 60)
+    e.stopPropagation();
+    let minutes = e.target.dataset.minutes || e.target.value
+    console.log(minutes)
+    // timer(minutes * 60)
 }
 
 
@@ -43,9 +46,23 @@ function timer(seconds) {
                     }, 1000)
 }
 
+function toggle_active(e) {
+    let element = e.target
+    
+    // Have only one active element
+    siblings = Array.from( element.parentNode.children )
+    siblings.forEach( sibling => sibling.classList.remove('active') );
+
+    element.classList.toggle('active'); 
+}
+
 
 
 
 
 /* ====== Events ====== */
-buttons.forEach( button => { button.addEventListener('click', set_timer) })
+buttons.forEach( button => { 
+    button.addEventListener('click', set_timer) 
+    button.addEventListener('click', toggle_active)
+})
+custom.addEventListener('submit', set_timer)

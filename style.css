@@ -1,55 +1,81 @@
-body {
+html {
     background: url('spiration-dark.png');
+}
+
+body {
     margin: 0;
     padding: 0;
-
     height: 100vh;
-    font-family: sans-serif;
-    color: white;
 
     display: flex;
-}
+    font-family: sans-serif;
+    color: white;
+    text-align: center;
 
-p {
-    margin: 0;
-    padding: 0.5em;
-}
-
-div#page-ctn {
-    margin: 0 auto;
-    height: 100%;
-    min-width: 80%;
-    
     background: url('abstract-clock.gif');
     background-size:  auto 100%;
     background-repeat: no-repeat;
     background-position: center; 
-
-    display: flex;
 }
+
+p {
+    margin: 0;
+    padding: 0.1em;
+}
+
+
 
 nav {
     position: absolute;
     top: 0;
-    width: 100%;
-    height: 10vh;
-    border-bottom: 2px solid gray;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
     box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+
+    --nb: 1px solid gray
 }
 
 nav > button {
+    margin: 0;
+    padding: 0 1em;
+    box-sizing: border-box;
+
     color: white;
     height: 100%;
     border: none;
-    background: transparent;
+    background-color: transparent;
+    background-size: 100%;
 }
 
 nav > button:not(:last-child) {
-    border-right: 2px solid gray;
+    border-right: var(--nb)
 }
+
+nav > button:hover:not(.custom) {
+    color: #31FFFF;
+}
+
+nav > .active {
+    font-weight: bold;
+    text-shadow: 2px 2px black;
+    background: url('stars.gif');
+}
+
+
+
 
 #countdown-text {
     margin: auto;
+    background: rgba(0,0,0, 0.5);
+    border-radius: 100%;
+    height: 3em;
+    display: flex;
+    align-items: center;
+    padding: 1em;
 }
 
 
